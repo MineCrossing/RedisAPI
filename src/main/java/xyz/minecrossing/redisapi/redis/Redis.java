@@ -3,6 +3,7 @@ package xyz.minecrossing.redisapi.redis;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import xyz.minecrossing.coreutilities.Logger;
 
 public class Redis {
 
@@ -33,10 +34,10 @@ public class Redis {
 
         // test connection
         try (Jedis j = pool.getResource()) {
-            System.out.println("Connected to Redis!");
+            Logger.info("Connected to Redis!");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Failed to connect to Redis...");
+            Logger.error("Failed to connect to Redis...");
         }
     }
 

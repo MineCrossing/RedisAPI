@@ -1,9 +1,12 @@
 package xyz.minecrossing.redisapi.utils;
 
+import xyz.minecrossing.coreutilities.io.PropertyLoader;
+import xyz.minecrossing.coreutilities.remote.ConnectionDetails;
+
 import java.io.*;
 import java.util.Properties;
 
-public class RedisProperties {
+public class RedisProperties implements PropertyLoader {
 
     private final String FILE_PATH = "src/main/resources/";
     private final String FILE_NAME = "redis.properties";
@@ -11,10 +14,9 @@ public class RedisProperties {
 
     /**
      * Create the database properties if they dont exist
-     *
-     * @return <code>true</code> if the file was created; <code>false</code> otherwise
      */
-    public boolean createProperties() {
+    @Override
+    public void createProperties() {
         if (!new File(FILE).exists()) {
             try (OutputStream output = new FileOutputStream(FILE)) {
                 Properties properties = new Properties();
@@ -23,13 +25,10 @@ public class RedisProperties {
                 properties.setProperty("password", "");
 
                 properties.store(output, null);
-
-                return true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
     /**
@@ -37,6 +36,7 @@ public class RedisProperties {
      *
      * @return The database connection details
      */
+    @Override
     public ConnectionDetails loadProperties() {
         try (InputStream input = new FileInputStream(FILE)) {
             Properties properties = new Properties();
@@ -44,8 +44,9 @@ public class RedisProperties {
 
             return new ConnectionDetails(
                     properties.getProperty("ip"),
-                    Integer.parseInt(properties.getProperty("port")),
-                    properties.getProperty("password")
+                    "",
+                    properties.getProperty("password"),
+                    Integer.parseInt(properties.getProperty("port"))
             );
         } catch (IOException e) {
             e.printStackTrace();

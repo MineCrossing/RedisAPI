@@ -20,6 +20,13 @@
             <artifactId>jedis</artifactId>
             <version>3.3.0</version>
         </dependency>
+
+        <!-- CoreUtilities -->
+        <dependency>
+            <groupId>xyz.minecrossing</groupId>
+            <artifactId>CoreUtilities</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

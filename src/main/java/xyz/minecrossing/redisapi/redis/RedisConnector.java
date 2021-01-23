@@ -2,8 +2,8 @@ package xyz.minecrossing.redisapi.redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
+import xyz.minecrossing.coreutilities.CoreUtilities;
 import xyz.minecrossing.redisapi.RedisAPI;
-import xyz.minecrossing.redisapi.utils.Util;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class RedisConnector {
     }
 
     public void listenForChannel(String channel, RedisChannelListener listener) {
-        Util.runAsync(() -> {
+        CoreUtilities.getTaskManager().runAsync(() -> {
             try (Jedis j = redis.getResource()) {
                 RedisPubSub redisPubSub = new RedisPubSub(listener);
                 pubSubs.add(redisPubSub);

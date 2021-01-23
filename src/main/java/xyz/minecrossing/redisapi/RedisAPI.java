@@ -1,11 +1,12 @@
 package xyz.minecrossing.redisapi;
 
 import redis.clients.jedis.JedisPubSub;
+import xyz.minecrossing.coreutilities.Logger;
+import xyz.minecrossing.coreutilities.remote.ConnectionDetails;
+import xyz.minecrossing.coreutilities.remote.ConnectionManager;
 import xyz.minecrossing.redisapi.listeners.DebugListener;
 import xyz.minecrossing.redisapi.redis.Redis;
 import xyz.minecrossing.redisapi.redis.RedisConnector;
-import xyz.minecrossing.redisapi.utils.ConnectionDetails;
-import xyz.minecrossing.redisapi.utils.ConnectionManager;
 import xyz.minecrossing.redisapi.utils.RedisProperties;
 
 public class RedisAPI implements ConnectionManager {
@@ -22,11 +23,11 @@ public class RedisAPI implements ConnectionManager {
 
         ConnectionDetails details = redisProperties.loadProperties();
         if (details == null) {
-            System.out.println("Failed to initialize RedisAPI - details failed to load!");
+            Logger.error("Failed to initialize RedisAPI - details failed to load!");
             return;
         }
 
-        this.redis = new Redis(details.getIp(), details.getPort(), details.getPassword());
+        this.redis = new Redis(details.getHostname(), details.getPort(), details.getPassword());
 
         redisConnector = new RedisConnector(redis);
 
