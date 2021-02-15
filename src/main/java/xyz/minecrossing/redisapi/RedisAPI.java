@@ -16,6 +16,9 @@ public class RedisAPI implements ConnectionManager {
     private Redis redis;
     private RedisConnector redisConnector;
 
+    /**
+     * Initialize the Redis connection and listen for the debug channel
+     */
     @Override
     public void initialize() {
         RedisProperties redisProperties = new RedisProperties();
@@ -34,6 +37,9 @@ public class RedisAPI implements ConnectionManager {
         redisConnector.listenForChannel("debug", new DebugListener());
     }
 
+    /**
+     * Shutdown the Redis connection to stop any leaks
+     */
     @Override
     public void shutdown() {
         for (JedisPubSub pubSub : RedisConnector.getInstance().getPubSubs()) {
@@ -42,10 +48,20 @@ public class RedisAPI implements ConnectionManager {
         redis.shutdown();
     }
 
+    /**
+     * Get an instance of the Redis connector
+     *
+     * @return An instance of the Redis connector
+     */
     public RedisConnector getRedisConnector() {
         return redisConnector;
     }
 
+    /**
+     * Get the Redis API class
+     *
+     * @return The Redis API class
+     */
     public static RedisAPI getRedisAPI() {
         if (redisAPI == null) redisAPI = new RedisAPI();
         return redisAPI;

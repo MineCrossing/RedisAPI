@@ -12,6 +12,13 @@ public class Redis {
 
     private JedisPool pool = null;
 
+    /**
+     * Constructor to create a Redis class containing connection information
+     *
+     * @param ip       The IP of the Redis server
+     * @param port     The port of the Redis server
+     * @param password The password for the Redis server
+     */
     public Redis(String ip, int port, String password) {
         this.ip = ip;
         this.port = port;
@@ -20,6 +27,9 @@ public class Redis {
         connect();
     }
 
+    /**
+     * Connect to the Redis connection pool of the remote server
+     */
     private void connect() {
         // create connection
         JedisPoolConfig config = new JedisPoolConfig();
@@ -41,10 +51,18 @@ public class Redis {
         }
     }
 
+    /**
+     * Get the Jedis resource
+     *
+     * @return The Jedis resource
+     */
     public Jedis getResource() {
         return pool.getResource();
     }
 
+    /**
+     * Check if the redis pool is not closed then close the connection pool
+     */
     public void shutdown() {
         if (!pool.isClosed()) pool.close();
     }
