@@ -44,9 +44,10 @@ public class RedisProperties implements PropertyLoader {
 
             return new ConnectionDetails(
                     properties.getProperty("ip"),
+                    Integer.parseInt(properties.getProperty("port")),
                     "",
-                    properties.getProperty("password"),
-                    Integer.parseInt(properties.getProperty("port"))
+                    properties.getProperty("password")
+
             );
         } catch (IOException e) {
             e.printStackTrace();
