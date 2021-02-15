@@ -13,7 +13,7 @@ public class RedisProperties implements PropertyLoader {
     private final String FILE = FILE_PATH + FILE_NAME;
 
     /**
-     * Create the database properties if they dont exist
+     * Create the redis connection properties if they dont exist
      */
     @Override
     public void createProperties() {
@@ -34,7 +34,7 @@ public class RedisProperties implements PropertyLoader {
     /**
      * Load the connection details from the storage medium
      *
-     * @return The database connection details
+     * @return The redis connection details
      */
     @Override
     public ConnectionDetails loadProperties() {
