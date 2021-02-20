@@ -2,19 +2,26 @@
 RedisAPI for communication between the MineCrossing website and game server
 
 ## Maven Repository
-To use RedisAPI run the following commands:
-```shell script
-git clone https://github.com/MineCrossing/RedisAPI.git
-cd RedisAPI
-mvn install
-```
-Then add this into your dependencies section in your pom.xml
+To use RedisAPI add these into your pom.xml
 ```xml
-<dependency>
-    <groupId>xyz.minecrossing</groupId>
-    <artifactId>RedisAPI</artifactId>
-    <version>1.0.0</version>
-</dependency>
+<repositories>
+    ...
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+</repositories>
+
+<dependencies>
+    ...
+    <dependency>
+        <groupId>com.github.MineCrossing</groupId>
+        <artifactId>RedisAPI</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+</dependencies>
 ```
 
 #### Example Usage
